@@ -41,44 +41,44 @@ public class ProcesoResource {
     }
     
     @GET
-    @Path("/dia/{fecha}")
+    @Path("/dia/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDia(@PathParam("fecha") String fecha){
-	return mapper.getProcesosDia(fecha);
+    public List<Proceso> getProcesosDia(){
+	return mapper.getProcesosDia();
     }
     
     @GET
-    @Path("/dia/{fecha}/{codEstado}")
+    @Path("/dia/{codEstado}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaCodEstado(@PathParam("fecha") String fecha, @PathParam("codEstado") Integer codEstado){
-	return mapper.getProcesosDiaCodEstado(fecha, codEstado);
+    public List<Proceso> getProcesosDiaCodEstado(@PathParam("codEstado") Integer codEstado){
+	return mapper.getProcesosDiaCodEstado(codEstado);
     }
     
     @GET
-    @Path("/dia/{fecha}/ejecutados")
+    @Path("/dia/ejecutados")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaProcesados(@PathParam("fecha") String fecha){
-	return mapper.getProcesosDiaEjecutados(fecha);
+    public List<Proceso> getProcesosDiaProcesados(){
+	return mapper.getProcesosDiaEjecutados();
     }
     
     @GET
-    @Path("/dia/{fecha}/exitosos")
+    @Path("/dia/exitosos")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaExitosos(@PathParam("fecha") String fecha){
-	return mapper.getProcesosDiaExitosos(fecha);
+    public List<Proceso> getProcesosDiaExitosos(){
+	return mapper.getProcesosDiaExitosos();
     }
     
     @GET
-    @Path("/dia/{fecha}/errores")
+    @Path("/dia/errores")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaErrores(@PathParam("fecha") String fecha){
-	return mapper.getProcesosDiaErrores(fecha);
+    public List<Proceso> getProcesosDiaErrores(){
+	return mapper.getProcesosDiaErrores();
     }
     
     @GET
-    @Path("/dia/{fecha}/pendientes")
+    @Path("/dia/pendientes")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaPendientess(@PathParam("fecha") String fecha){
-	return mapper.getProcesosDiaPendientes(fecha);
+    public List<Proceso> getProcesosDiaPendientess(){
+	return mapper.getProcesosDiaPendientes();
     }
 }

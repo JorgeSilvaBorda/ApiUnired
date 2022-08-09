@@ -94,9 +94,15 @@ public interface ProcesoMapper {
     @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) OR (EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = 29 ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaErrores();
     
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE (CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) OR (EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE()))) AND EstadoProceso = 56 ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) OR (EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso IN (56, 25) ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaPendientes();
+    
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) OR (EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = 40 ORDER BY IDPROCESO ASC")
+    List<Proceso> getProcesosDiaEnviadoMail();
 
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) OR (EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = 4046 ORDER BY IDPROCESO ASC")
+    List<Proceso> getProcesosRendicionVacia();
+    
     @Select(QUERY_SUB_PROCESOS)
     List<SubProceso> getSubProcesosIdProceso(Integer idProceso);
 

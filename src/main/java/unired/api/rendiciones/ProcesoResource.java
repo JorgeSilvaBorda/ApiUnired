@@ -81,4 +81,18 @@ public class ProcesoResource {
     public List<Proceso> getProcesosDiaPendientess(){
 	return mapper.getProcesosDiaPendientes();
     }
+    
+    @GET
+    @Path("/dia/vacias")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Proceso> getProcesosRendicionVacia(){
+	return mapper.getProcesosRendicionVacia();
+    }
+    
+    @GET
+    @Path("/dia/enviadasmail")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Proceso> getProcesosEnviadoMail(){
+	return mapper.getProcesosDiaEnviadoMail();
+    }
 }

@@ -22,11 +22,17 @@ public interface ProcesoMapper {
 	    + "FROM\n"
 	    + "   	Procesos\n"
 	    + "WHERE\n"
-	    + "	(CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))";
+	    + "	((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	))";
 
     final String QUERY_PROCESO_UNICO = "SELECT\n"
 	    + "    a.IdProceso,\n"
@@ -51,11 +57,17 @@ public interface ProcesoMapper {
 	    + "	Procesos a inner join Empresas b\n"
 	    + "    on a.IdEmpresa = b.IdEmpresa\n"
 	    + "WHERE\n"
-	    + " ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE()))))"
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	))"
 	    + " and a.IdProceso = #{idProceso}\n"
 	    + "order by\n"
 	    + "	a.FechaCreacion DESC";
@@ -76,42 +88,89 @@ public interface ProcesoMapper {
     @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE IdProceso = #{idProceso}")
     Proceso getProceso(Integer idProceso);
 
-    @Select("SELECT COUNT(IdProceso) CANT FROM Procesos WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE()))))")
+    @Select("SELECT COUNT(IdProceso) CANT FROM Procesos "
+	    + " WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	))")
     Integer getProcesosActivos();
 
     @Select(QUERY_CUENTA_PROCESOS)
     Procesos getCuentaProcesos();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + " WHERE "
+	    + "	((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDia();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = #{codEstado} ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + "	WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso = #{codEstado} "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaCodEstado(Integer codEstado);
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso in(27,28,29,40,4046) ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + " WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso in(27,28,29,40,4046) "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaEjecutados();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso in(27,40,4046) ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + " WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso in(27,40,4046) "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaExitosos();
 
     @Select("SELECT \n"
@@ -120,34 +179,87 @@ public interface ProcesoMapper {
 	    + "	Procesos a inner join Empresas b \n"
 	    + "	on a.IdEmpresa = b.IdEmpresa \n"
 	    + "WHERE \n"
-	    + "	((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE()))))\n"
+	    + "	((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	))"
 	    + "and EstadoProceso = 29")
     List<Proceso> getProcesosDiaErrores();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso IN (56, 25) ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + " WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso IN (56, 25) "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaPendientes();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = 40 ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + "	WHERE "
+	    + "	((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso = 40 "
+	    + "ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosDiaEnviadoMail();
 
-    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa WHERE ((CONVERT(DATE, FechaCreacion) = CONVERT(DATE, GETDATE()) AND EstadoProceso != 56) \n"
-	    + "		OR \n"
-	    + "	(EstadoProceso = 56 AND CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))\n"
-	    + "		OR \n"
-	    + "	((DATEPART(HH, FinProceso) = 13) and CONVERT(DATE, FechaCreacion) = CONVERT(DATE, DATEADD(DAY, -1, GETDATE())))) AND EstadoProceso = 4046 ORDER BY IDPROCESO ASC")
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + "	WHERE "
+	    + "	((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso = 4046 "
+	    + " ORDER BY IDPROCESO ASC")
     List<Proceso> getProcesosRendicionVacia();
+
+    @Select("SELECT * FROM Procesos a inner join Empresas b on a.IdEmpresa = b.IdEmpresa "
+	    + " WHERE "
+	    + " ((	"
+	    + "		convert(date, FechaCreacion) = convert(date, getdate())"
+	    + "			and "
+	    + "		datepart(HH, FinProceso) != 13 "
+	    + "	)"
+	    + "	or "
+	    + "	("
+	    + "		convert(date, FechaCreacion) = dateadd(day, -1, convert(date, getdate()))"
+	    + "			and"
+	    + "		datepart(HH, FinProceso) = 13"
+	    + "	)) "
+	    + " AND EstadoProceso = 26 "
+	    + " ORDER BY IDPROCESO ASC")
+    List<Proceso> getProcesosRendicionEjecucion();
 
     @Select(QUERY_SUB_PROCESOS)
     List<SubProceso> getSubProcesosIdProceso(Integer idProceso);

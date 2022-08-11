@@ -95,4 +95,11 @@ public class ProcesoResource {
     public List<Proceso> getProcesosEnviadoMail(){
 	return mapper.getProcesosDiaEnviadoMail();
     }
+    
+    @GET
+    @Path("/dia/ejecucion")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Proceso> getProcesosEjecucion(){
+	return mapper.getProcesosRendicionEjecucion();
+    }
 }

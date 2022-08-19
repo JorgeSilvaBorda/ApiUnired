@@ -43,7 +43,7 @@ public class ProcesoResource {
     @GET
     @Path("/dia/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDia(){
+    public List<ProcesoProgramado> getProcesosDia(){
 	return mapper.getProcesosDia();
     }
     
@@ -94,6 +94,20 @@ public class ProcesoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Proceso> getProcesosEnviadoMail(){
 	return mapper.getProcesosDiaEnviadoMail();
+    }
+    
+    @GET
+    @Path("/dia/generadas")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Proceso> getProcesosGenerados(){
+	return mapper.getProcesosGenerados();
+    }
+    
+    @GET
+    @Path("/dia/transmitidas")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Proceso> getProcesosTransmitidos(){
+	return mapper.getProcesosTransmitidos();
     }
     
     @GET

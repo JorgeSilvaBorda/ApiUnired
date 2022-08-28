@@ -10,110 +10,108 @@ import java.util.List;
 
 @Path("/proceso")
 public class ProcesoResource {
-    @Inject ProcesoMapper mapper;
-    
-    @Path("/{idProceso}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Proceso getProcesoByIdProceso(@PathParam("idProceso") Integer idProceso){
-	return mapper.getProceso(idProceso);
-    }
-    
+
+    @Inject
+    ProcesoMapper mapper;
+
     @Path("/{idProceso}/subprocesos")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SubProceso> getSubProcesos(@PathParam("idProceso") Integer idProceso){
+    public List<SubProceso> getSubProcesos(@PathParam("idProceso") Integer idProceso) {
 	return mapper.getSubProcesosIdProceso(idProceso);
     }
-    
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Integer getProcesosActivos(){
-	return mapper.getProcesosActivos();
-    }
-    
+
     @GET
     @Path("/resumen")
     @Produces(MediaType.APPLICATION_JSON)
-    public Procesos getResumenProcesos(){
-	return mapper.getCuentaProcesos();
+    public Procesos getResumenProcesos() {
+	Procesos procs = mapper.getCuentaProcesos();
+	TipoDia tipo = mapper.getTipoDia();
+	if (tipo.getEsFeriado() == 1 || tipo.getEsFinDeSemana() == 1) {
+	    procs.setTotal(mapper.getProgramadosDiaFeriado());
+	} else if (tipo.getAyerFinDeSemanaOFeriado() == 1) {
+	    procs.setTotal(mapper.getProgramadosDiaPostFeriado());
+	} else {
+	    procs.setTotal(mapper.getProgramadosDiaNormal());
+	}
+	return procs;
     }
-    
+
     @GET
     @Path("/dia/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProcesoProgramado> getProcesosDia(){
-	return mapper.getProcesosDia();
+    public List<ProcesoProgramado> getProcesosDia() {
+	TipoDia tipo = mapper.getTipoDia();
+	
+	if (tipo.getEsFeriado() == 1 || tipo.getEsFinDeSemana() == 1) {
+	    return mapper.getProcesosDiaFeriado();
+	} else if (tipo.getAyerFinDeSemanaOFeriado() == 1) {
+	    return mapper.getProcesosDiaPostferiado();
+	} else {
+	    return mapper.getProcesosDiaNormal();
+	}
     }
-    
-    @GET
-    @Path("/dia/{codEstado}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaCodEstado(@PathParam("codEstado") Integer codEstado){
-	return mapper.getProcesosDiaCodEstado(codEstado);
-    }
-    
+
     @GET
     @Path("/dia/ejecutados")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaProcesados(){
+    public List<Proceso> getProcesosDiaProcesados() {
 	return mapper.getProcesosDiaEjecutados();
     }
-    
+
     @GET
     @Path("/dia/exitosos")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaExitosos(){
+    public List<Proceso> getProcesosDiaExitosos() {
 	return mapper.getProcesosDiaExitosos();
     }
-    
+
     @GET
     @Path("/dia/errores")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaErrores(){
+    public List<Proceso> getProcesosDiaErrores() {
 	return mapper.getProcesosDiaErrores();
     }
-    
+
     @GET
     @Path("/dia/pendientes")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosDiaPendientess(){
+    public List<Proceso> getProcesosDiaPendientess() {
 	return mapper.getProcesosDiaPendientes();
     }
-    
+
     @GET
     @Path("/dia/vacias")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosRendicionVacia(){
+    public List<Proceso> getProcesosRendicionVacia() {
 	return mapper.getProcesosRendicionVacia();
     }
-    
+
     @GET
     @Path("/dia/enviadasmail")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosEnviadoMail(){
+    public List<Proceso> getProcesosEnviadoMail() {
 	return mapper.getProcesosDiaEnviadoMail();
     }
-    
+
     @GET
     @Path("/dia/generadas")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosGenerados(){
+    public List<Proceso> getProcesosGenerados() {
 	return mapper.getProcesosGenerados();
     }
-    
+
     @GET
     @Path("/dia/transmitidas")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosTransmitidos(){
+    public List<Proceso> getProcesosTransmitidos() {
 	return mapper.getProcesosTransmitidos();
     }
-    
+
     @GET
     @Path("/dia/ejecucion")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Proceso> getProcesosEjecucion(){
+    public List<Proceso> getProcesosEjecucion() {
 	return mapper.getProcesosRendicionEjecucion();
     }
 }

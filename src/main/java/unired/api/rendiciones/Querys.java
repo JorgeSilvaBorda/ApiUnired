@@ -641,7 +641,8 @@ public class Querys {
 	    + " AND s.EstadoProceso in(27,28,29,40,4046) "
 	    + " ORDER BY s.IdProceso ASC";
 
-    public static final String TIPO_DIA = "SELECT \n"
+    public static final String TIPO_DIA = ""
+	    + "SELECT \n"
 	    + "	 SUM(\n"
 	    + "	 	CASE \n"
 	    + " 	 		WHEN CONVERT(DATE, GETDATE()) = CONVERT(DATE, FechaFeriado) THEN 1 ELSE 0\n"
@@ -649,7 +650,10 @@ public class Querys {
 	    + "	 	) esFeriado,\n"
 	    + "	 CASE \n"
 	    + "	 	WHEN DATEPART(WEEKDAY, GETDATE()) IN (7, 1) THEN 1 ELSE 0\n"
-	    + "	 END esFinDeSemana \n"
+	    + "	 END esFinDeSemana,\n"
+	    + "	 CASE \n"
+	    + "	 	WHEN DATEPART(WEEKDAY, DATEADD(DAY, -1, CONVERT(DATE,GETDATE()))) = 1 OR SUM(CASE WHEN DATEADD(DAY, -1, CONVERT(DATE, GETDATE())) = CONVERT(DATE, FechaFeriado) THEN 1 ELSE 0 END ) > 0 THEN 1 ELSE 0\n"
+	    + "	 END ayerFinDeSemanaOFeriado \n"
 	    + "FROM\n"
-	    + "	Feriados";
+	    + "	Feriados f ";
 }

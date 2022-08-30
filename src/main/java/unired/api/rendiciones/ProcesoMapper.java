@@ -1,6 +1,5 @@
 package unired.api.rendiciones;
 
-import java.time.LocalDate;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -10,10 +9,10 @@ public interface ProcesoMapper {
 
     @Select(Querys.PROGRAMADO_DIA_FERIADO)
     Integer getProgramadosDiaFeriado();
-    
+
     @Select(Querys.PROGRAMADO_DIA_POSTFERIADO)
     Integer getProgramadosDiaPostFeriado();
-    
+
     @Select(Querys.PROGRAMADO_DIA_NORMAL)
     Integer getProgramadosDiaNormal();
 
@@ -22,10 +21,10 @@ public interface ProcesoMapper {
 
     @Select(Querys.PROCESOS_DIA_FERIADO)
     List<ProcesoProgramado> getProcesosDiaFeriado();
-    
+
     @Select(Querys.PROCESOS_DIA_NORMAL)
     List<ProcesoProgramado> getProcesosDiaNormal();
-    
+
     @Select(Querys.PROCESOS_DIA_POSTFERIADO)
     List<ProcesoProgramado> getProcesosDiaPostferiado();
 
@@ -58,8 +57,5 @@ public interface ProcesoMapper {
 
     @Select(Querys.SUB_PROCESOS)
     List<SubProceso> getSubProcesosIdProceso(Integer idProceso);
-    
-    @Select(Querys.TIPO_DIA)
-    TipoDia getTipoDia();
 
 }

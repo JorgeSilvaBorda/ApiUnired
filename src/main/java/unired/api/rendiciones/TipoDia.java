@@ -1,43 +1,53 @@
 package unired.api.rendiciones;
 
-public class TipoDia {
-    private Integer esFeriado;
-    private Integer esFinDeSemana;
-    private Integer ayerFinDeSemanaOFeriado;
+import java.io.Serializable;
+
+public class TipoDia implements Serializable {
+    
+    private Integer feriado;
+    private Integer finSemana;
+    private Integer ayerFeriado;
     
     public TipoDia(){
 	
     }
-
-    public TipoDia(Integer esFeriado, Integer esFinDeSemana, Integer ayerFinDeSemanaOFeriado) {
-	this.esFeriado = esFeriado;
-	this.esFinDeSemana = esFinDeSemana;
-	this.ayerFinDeSemanaOFeriado = ayerFinDeSemanaOFeriado;
+    /*
+    public TipoDia(@Param("feriado") int feriado, @Param("finSemana") int finSemana, @Param("ayerFeriado") int ayerFeriado) {
+	this.feriado = feriado;
+	this.finSemana = finSemana;
+	this.ayerFeriado = ayerFeriado;
+    }
+    */
+    /*
+    public TipoDia(Integer feriado, Integer finSemana, Integer ayerFeriado, String comment) {
+	this.feriado = feriado;
+	this.finSemana = finSemana;
+	this.ayerFeriado = ayerFeriado;
+	this.comment = comment;
+    }
+    */
+    public int getFeriado() {
+	return feriado;
     }
 
-    public Integer getEsFeriado() {
-	return esFeriado;
+    public void setFeriado(Integer feriado) {
+	this.feriado = feriado;
     }
 
-    public void setEsFeriado(Integer esFeriado) {
-	this.esFeriado = esFeriado;
+    public Integer getFinSemana() {
+	return finSemana;
     }
 
-    public Integer getEsFinDeSemana() {
-	return esFinDeSemana;
+    public void setFinSemana(Integer finSemana) {
+	this.finSemana = finSemana;
     }
 
-    public void setEsFinDeSemana(Integer esFinDeSemana) {
-	this.esFinDeSemana = esFinDeSemana;
+    public Integer getAyerFeriado() {
+	return ayerFeriado;
     }
 
-    public Integer getAyerFinDeSemanaOFeriado() {
-	return ayerFinDeSemanaOFeriado;
-    }
-
-    public void setAyerFinDeSemanaOFeriado(Integer ayerFinDeSemanaOFeriado) {
-	this.ayerFinDeSemanaOFeriado = ayerFinDeSemanaOFeriado;
-    }
-
-        
+    public void setAyerFeriado(Integer ayerFeriado) {
+	this.ayerFeriado = ayerFeriado;
+    }        
+    
 }

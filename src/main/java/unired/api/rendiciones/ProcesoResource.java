@@ -33,15 +33,16 @@ public class ProcesoResource {
 	TipoDia tipo = new TipoDia();
 	tipo = tMapper.obtenerTipoDiaHoy();
 	if (tipo.getFeriado() == 1 || tipo.getFinSemana() == 1) {
-	    System.out.println("Es feriado o finde");
-	    procs.setTotal(mapper.getProgramadosDiaFeriado());
+	    if(tipo.getAyerFeriado() == 0){
+		procs.setTotal(mapper.getProgramadosDiaFeriadoAnteriorNormal());
+	    }else{
+		procs.setTotal(mapper.getProgramadosDiaFeriado());
+	    }
+	    
 	} else if (tipo.getAyerFeriado() == 1) {
-	    System.out.println("Ayer fue feriado");
 	    procs.setTotal(mapper.getProgramadosDiaPostFeriado());
 	} else {
-	    System.out.println("Es dia normal");
 	    procs.setTotal(mapper.getProgramadosDiaNormal());
-	    System.out.println("total: " + procs.getTotal());
 	}
 	return procs;
     }
@@ -53,7 +54,12 @@ public class ProcesoResource {
 	TipoDia tipo = tMapper.obtenerTipoDiaHoy();
 	
 	if (tipo.getFeriado() == 1 || tipo.getFinSemana() == 1) {
-	    return mapper.getProcesosDiaFeriado();
+	    if(tipo.getAyerFeriado() == 0){
+		return mapper.getProcesosDiaFeriadoAnteriorNormal();
+	    }else{
+		return mapper.getProcesosDiaFeriado();
+	    }
+	    
 	} else if (tipo.getAyerFeriado() == 1) {
 	    return mapper.getProcesosDiaPostferiado();
 	} else {

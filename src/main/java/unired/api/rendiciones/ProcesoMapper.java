@@ -9,6 +9,9 @@ public interface ProcesoMapper {
 
     @Select(Querys.PROGRAMADO_DIA_FERIADO)
     Integer getProgramadosDiaFeriado();
+    
+    @Select(Querys.PROGRAMADO_DIA_FERIADO_ANTERIOR_NORMAL)
+    Integer getProgramadosDiaFeriadoAnteriorNormal();
 
     @Select(Querys.PROGRAMADO_DIA_POSTFERIADO)
     Integer getProgramadosDiaPostFeriado();
@@ -21,6 +24,9 @@ public interface ProcesoMapper {
 
     @Select(Querys.PROCESOS_DIA_FERIADO)
     List<ProcesoProgramado> getProcesosDiaFeriado();
+    
+    @Select(Querys.PROCESOS_DIA_FERIADO_ANTERIOR_NORMAL)
+    List<ProcesoProgramado> getProcesosDiaFeriadoAnteriorNormal();
 
     @Select(Querys.PROCESOS_DIA_NORMAL)
     List<ProcesoProgramado> getProcesosDiaNormal();

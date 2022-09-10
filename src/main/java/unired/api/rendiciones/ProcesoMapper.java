@@ -1,10 +1,12 @@
 package unired.api.rendiciones;
 
+import io.quarkiverse.mybatis.runtime.meta.MapperDataSource;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
+@MapperDataSource("rendiciones")
 public interface ProcesoMapper {
 
     @Select(Querys.PROGRAMADO_DIA_FERIADO)

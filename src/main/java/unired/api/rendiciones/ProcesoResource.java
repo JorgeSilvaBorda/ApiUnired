@@ -1,5 +1,6 @@
 package unired.api.rendiciones;
 
+import io.quarkus.agroal.DataSource;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,11 +11,15 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 @Path("/proceso")
+@ApplicationScoped
 public class ProcesoResource {
 
     @Inject
+    //@DataSource("rendiciones")
     ProcesoMapper mapper;
+    
     @Inject
+    //@DataSource("rendiciones")
     TipoDiaMapper tMapper;
 
     @Path("/{idProceso}/subprocesos")
@@ -28,17 +33,17 @@ public class ProcesoResource {
     @Path("/resumen")
     @Produces(MediaType.APPLICATION_JSON)
     public Procesos getResumenProcesos() {
-	
+
 	Procesos procs = mapper.getCuentaProcesos();
 	TipoDia tipo = new TipoDia();
 	tipo = tMapper.obtenerTipoDiaHoy();
 	if (tipo.getFeriado() == 1 || tipo.getFinSemana() == 1) {
-	    if(tipo.getAyerFeriado() == 0){
+	    if (tipo.getAyerFeriado() == 0) {
 		procs.setTotal(mapper.getProgramadosDiaFeriadoAnteriorNormal());
-	    }else{
+	    } else {
 		procs.setTotal(mapper.getProgramadosDiaFeriado());
 	    }
-	    
+
 	} else if (tipo.getAyerFeriado() == 1) {
 	    procs.setTotal(mapper.getProgramadosDiaPostFeriado());
 	} else {
@@ -52,14 +57,14 @@ public class ProcesoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<ProcesoProgramado> getProcesosDia() {
 	TipoDia tipo = tMapper.obtenerTipoDiaHoy();
-	
+
 	if (tipo.getFeriado() == 1 || tipo.getFinSemana() == 1) {
-	    if(tipo.getAyerFeriado() == 0){
+	    if (tipo.getAyerFeriado() == 0) {
 		return mapper.getProcesosDiaFeriadoAnteriorNormal();
-	    }else{
+	    } else {
 		return mapper.getProcesosDiaFeriado();
 	    }
-	    
+
 	} else if (tipo.getAyerFeriado() == 1) {
 	    return mapper.getProcesosDiaPostferiado();
 	} else {

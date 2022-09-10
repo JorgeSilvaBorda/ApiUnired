@@ -2,6 +2,7 @@ package unired.api.rendiciones;
 
 public class Querys {
 
+    //Rendiciones -------------------------------------------------------------------------------------------
     public static final String PROGRAMADO_DIA_FERIADO = ""
 	    + "SELECT COUNT(*)\n"
 	    + "	FROM \n"
@@ -688,4 +689,25 @@ public class Querys {
 	    + "	 END ayerFinDeSemanaOFeriado \n"
 	    + "FROM\n"
 	    + "	Feriados f ";
+
+    //Fin Rendiciones -------------------------------------------------------------------------------------------
+    //Nominas ---------------------------------------------------------------------------------------------------
+    public static final String RESUMEN_NOMINAS = ""
+	    + "SELECT \n"
+	    + "	SUM(CASE WHEN b.id_estado = 1 then 1 else 0 end) exitoso,\n"
+	    + "	SUM(CASE WHEN b.id_estado = 2 then 1 else 0 end) error,\n"
+	    + "	SUM(CASE WHEN b.id_estado = 3 then 1 else 0 end) norecibida,\n"
+	    + "	SUM(CASE WHEN b.id_estado = 4 then 1 else 0 end) sinprocesar,\n"
+	    + "	SUM(CASE WHEN b.id_estado = 6 then 1 else 0 end) parcialmente,\n"
+	    + "	SUM(CASE WHEN b.id_estado = 7 then 1 else 0 end) nocumple,\n"
+	    + "	SUM(CASE WHEN b.id_estado is null then 1 else 0 end) pendiente,\n"
+	    + "	SUM(CASE WHEN b.id_estado is null then 0 else 1 end) ejecutados\n"
+	    + "FROM 	\n"
+	    + "	tbl_EmpUnimarc a LEFT JOIN tbl_LogUnimarc b \n"
+	    + "	ON a.id_empresa  = b.id_empresa \n"
+	    + "		and convert(date, b.fecha_proceso) = convert(date, getdate()) LEFT JOIN tbl_EstaUnimarc c\n"
+	    + "	ON b.id_estado = c.id_estado \n"
+	    + "WHERE \n"
+	    + "	a.estado = 1";
+    
 }

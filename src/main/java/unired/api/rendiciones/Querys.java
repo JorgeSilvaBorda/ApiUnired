@@ -694,6 +694,7 @@ public class Querys {
     //Nominas ---------------------------------------------------------------------------------------------------
     public static final String RESUMEN_NOMINAS = ""
 	    + "SELECT \n"
+	    + " COUNT(1) total,"
 	    + "	SUM(CASE WHEN b.id_estado = 1 then 1 else 0 end) exitoso,\n"
 	    + "	SUM(CASE WHEN b.id_estado = 2 then 1 else 0 end) error,\n"
 	    + "	SUM(CASE WHEN b.id_estado = 3 then 1 else 0 end) norecibida,\n"

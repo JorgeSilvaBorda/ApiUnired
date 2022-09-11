@@ -1,6 +1,7 @@
 package unired.api.rendiciones;
 
 public class ProcesosNomina {
+    private Integer total;
     private Integer exitoso;
     private Integer error;
     private Integer noRecibida;
@@ -8,11 +9,13 @@ public class ProcesosNomina {
     private Integer parcialmente;
     private Integer noCumple;
     private Integer pendiente;
+    private Integer ejecutados;
 
     public ProcesosNomina() {
     }
 
-    public ProcesosNomina(Integer exitoso, Integer error, Integer noRecibida, Integer sinProcesar, Integer parcialmente, Integer noCumple, Integer pendiente) {
+    public ProcesosNomina(Integer total, Integer exitoso, Integer error, Integer noRecibida, Integer sinProcesar, Integer parcialmente, Integer noCumple, Integer pendiente, Integer ejecutados) {
+	this.total = total;
 	this.exitoso = exitoso;
 	this.error = error;
 	this.noRecibida = noRecibida;
@@ -20,6 +23,15 @@ public class ProcesosNomina {
 	this.parcialmente = parcialmente;
 	this.noCumple = noCumple;
 	this.pendiente = pendiente;
+	this.ejecutados = ejecutados;
+    }
+    
+    public Integer getTotal() {
+	return total;
+    }
+
+    public void setTotal(Integer total) {
+	this.total = total;
     }
 
     public Integer getExitoso() {
@@ -77,6 +89,14 @@ public class ProcesosNomina {
     public void setPendiente(Integer pendiente) {
 	this.pendiente = pendiente;
     }
-    
+
+    public Integer getEjecutados() {
+	return ejecutados;
+    }
+
+    public void setEjecutados(Integer ejecutados) {
+	this.ejecutados = ejecutados;
+    }
+
     
 }

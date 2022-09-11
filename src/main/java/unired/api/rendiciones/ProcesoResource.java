@@ -15,11 +15,9 @@ import javax.enterprise.context.ApplicationScoped;
 public class ProcesoResource {
 
     @Inject
-    //@DataSource("rendiciones")
     ProcesoMapper mapper;
     
     @Inject
-    //@DataSource("rendiciones")
     TipoDiaMapper tMapper;
 
     @Path("/{idProceso}/subprocesos")

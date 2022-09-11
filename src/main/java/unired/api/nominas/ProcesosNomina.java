@@ -1,4 +1,4 @@
-package unired.api.rendiciones;
+package unired.api.nominas;
 
 public class ProcesosNomina {
     private Integer total;

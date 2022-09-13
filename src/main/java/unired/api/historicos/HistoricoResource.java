@@ -25,6 +25,10 @@ public class HistoricoResource {
     @Path("/rendiciones/{fechaIni}/{fechaFin}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Proceso> getRendicionesHistoria(@PathParam("fechaIni") String fechaIni, @PathParam("fechaFin") String fechaFin) {
+	System.out.println("Entra a historia rendiciones");
+	System.out.println("FechaIni: " + fechaIni);
+	System.out.println("FechaFin: " + fechaFin);
+	System.out.println(rendicionesMapper.getRendicionesHistoria(fechaIni, fechaFin).size());
 	return rendicionesMapper.getRendicionesHistoria(fechaIni, fechaFin);
     }
     

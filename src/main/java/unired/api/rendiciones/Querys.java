@@ -699,6 +699,7 @@ public class Querys {
 	    + "	s.FechaCreacion fechaCreacion,\n"
 	    + "	s.InicioProceso inicioProceso,\n"
 	    + "	s.FinProceso finProceso,\n"
+	    + " s.FechaIso fechaIso,\n"
 	    + "	p.TipoCorte,\n"
 	    + "	d.TipoRendicion,\n"
 	    + "	d.IdDefinicionArchivos\n"
@@ -710,7 +711,7 @@ public class Querys {
 	    + "	on CONVERT(DATE, s.FechaCreacion) = CONVERT(DATE, f.FechaFeriado) inner join Empresas e\n"
 	    + "	on s.IdEmpresa = e.IdEmpresa\n"
 	    + "WHERE \n"
-	    + "	s.FechaCreacion BETWEEN '${fechaIni}' and '${fechaFin}'\n"
+	    + "	CONVERT(DATE, s.FechaCreacion) BETWEEN '${fechaIni}' and '${fechaFin}'\n"
 	    + "ORDER BY \n"
 	    + "	s.IdProceso ASC";
     

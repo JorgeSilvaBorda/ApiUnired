@@ -235,6 +235,6 @@ public class Querys {
 	    + "	on a.id_empresa = b.cod_empresa INNER JOIN tbl_EstaUnimarc c\n"
 	    + "	on a.id_estado = c.id_estado \n"
 	    + "WHERE \n"
-	    + "	a.fecha_proceso BETWEEN '${fechaIni}' AND '${fechaFin}'\n"
+	    + "	CONVERT(DATE, a.fecha_proceso) BETWEEN '${fechaIni}' AND '${fechaFin}'\n"
 	    + "	";
 }

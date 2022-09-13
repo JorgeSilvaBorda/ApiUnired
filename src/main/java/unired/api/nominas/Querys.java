@@ -217,4 +217,24 @@ public class Querys {
 	    + "WHERE \n"
 	    + "	a.estado = 1\n"
 	    + "	and b.id_estado = 7";
+
+    public static final String HISTORIA = ""
+	    + "select \n"
+	    + "	a.id_empresa idEmpresa,\n"
+	    + "	b.cod_empresa codEmpresa,\n"
+	    + "	b.glosa_empresa nomEmpresa,\n"
+	    + "	b.per_inicio horaIni,\n"
+	    + "	b.per_final horaFin,\n"
+	    + "	a.fecha_proceso fechaProceso,\n"
+	    + "	a.fecha_termino fechaTermino,\n"
+	    + "	DATEDIFF(MINUTE, a.fecha_proceso, a.fecha_termino) minutos,\n"
+	    + "	c.id_estado idEstado,\n"
+	    + "	c.glosa_estado estado\n"
+	    + "FROM \n"
+	    + "	tbl_LogUnimarc a INNER JOIN tbl_EmpUnimarc b \n"
+	    + "	on a.id_empresa = b.cod_empresa INNER JOIN tbl_EstaUnimarc c\n"
+	    + "	on a.id_estado = c.id_estado \n"
+	    + "WHERE \n"
+	    + "	a.fecha_proceso BETWEEN '${fechaIni}' AND '${fechaFin}'\n"
+	    + "	";
 }

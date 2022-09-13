@@ -38,4 +38,7 @@ public interface ProcesoNominasMapper {
     
     @Select(Querys.QUERY_NO_CUMPLE)
     List<ProcesoNomina> getNoCumple();
+    
+    @Select(Querys.HISTORIA)
+    List<ProcesoNomina> getNominasHistoria(String fechaIni, String fechaFin);
 }

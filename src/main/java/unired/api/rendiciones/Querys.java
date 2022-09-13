@@ -1,7 +1,7 @@
 package unired.api.rendiciones;
 
 public class Querys {
-    
+
     public static final String PROGRAMADO_DIA_FERIADO = ""
 	    + "SELECT COUNT(*)\n"
 	    + "	FROM \n"
@@ -688,6 +688,32 @@ public class Querys {
 	    + "	 END ayerFinDeSemanaOFeriado \n"
 	    + "FROM\n"
 	    + "	Feriados f ";
+
+    public static final String HISTORIA = ""
+	    + "SELECT \n"
+	    + " 	s.IdProceso idProceso,\n"
+	    + "	s.IdEmpresa idEmpresa,\n"
+	    + "	e.NombreEps nombreEps,\n"
+	    + "	s.EstadoProceso estadoProceso,\n"
+	    + "	s.FechaProceso fechaProceso,\n"
+	    + "	s.FechaCreacion fechaCreacion,\n"
+	    + "	s.InicioProceso inicioProceso,\n"
+	    + "	s.FinProceso finProceso,\n"
+	    + " s.FechaIso fechaIso,\n"
+	    + "	p.TipoCorte,\n"
+	    + "	d.TipoRendicion,\n"
+	    + "	d.IdDefinicionArchivos\n"
+	    + "FROM \n"
+	    + "	TareasProgramadas t inner join PlanRendiciones p\n"
+	    + "	on t.PlanRendiciones_IdEmpresa = p.IdEmpresa inner join  DefinicionArchivos d\n"
+	    + "	on d.IdEmpresa = p.IdEmpresa inner join Procesos s\n"
+	    + "	on d.IdDefinicionArchivos = s.DefinicionArchivos_IdDefinicionArchivos left join Feriados f\n"
+	    + "	on CONVERT(DATE, s.FechaCreacion) = CONVERT(DATE, f.FechaFeriado) inner join Empresas e\n"
+	    + "	on s.IdEmpresa = e.IdEmpresa\n"
+	    + "WHERE \n"
+	    + "	CONVERT(DATE, s.FechaCreacion) BETWEEN '${fechaIni}' and '${fechaFin}'\n"
+	    + "ORDER BY \n"
+	    + "	s.IdProceso ASC";
     
-    
+
 }

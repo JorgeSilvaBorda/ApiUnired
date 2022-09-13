@@ -65,5 +65,8 @@ public interface ProcesoMapper {
 
     @Select(Querys.SUB_PROCESOS)
     List<SubProceso> getSubProcesosIdProceso(Integer idProceso);
+    
+    @Select(Querys.HISTORIA)
+    List<Proceso> getRendicionesHistoria(String fechaIni, String fechaFin);
 
 }

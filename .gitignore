@@ -19,7 +19,7 @@ bin/
 
 # NetBeans
 nb-configuration.xml
-
+nbproject
 # Visual Studio Code
 .vscode
 .factorypath

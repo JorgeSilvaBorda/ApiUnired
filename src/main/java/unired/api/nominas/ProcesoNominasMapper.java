@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 @MapperDataSource("nominas")
-public interface ProcesoNominasMapper {
+public interface ProcesoNominasMapper { 
 
     @Select(Querys.RESUMEN_NOMINAS)
     ProcesosNomina getResumenNominas();

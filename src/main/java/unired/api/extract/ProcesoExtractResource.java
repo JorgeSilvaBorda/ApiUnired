@@ -62,7 +62,6 @@ public class ProcesoExtractResource {
         salida.put("enEjecucion", enEjecucion);
         salida.put("exitoso", exitoso);
         salida.put("error", error);
-        System.out.println(salida);
         return salida;
         
     }

@@ -2,12 +2,11 @@ package unired.api.extract;
 
 public class Querys {
 
-    public static final String EXTRACT_DIA_ACTUAL = ""
+    public static final String EXTRACT_FECHA_ACTUAL = ""
             + "SELECT \n"
             + "	A.IdLogSistema IDLOGSISTEMA,\n"
-            + " A.IdEmpresa IDEMPRESA,\n"
-            + " 'EXTRACT' AS CODEMPRESA,\n"
-            + "	'EXTRACT' AS NOMBREEPS,\n"
+            + "	A.IdEmpresa IDEMPRESA,\n"
+            + "	C.NombreEps AS NOMBREEPS,\n"
             + "	A.FechaCreacion FECHAHORACREACION,\n"
             + "	CONVERT(DATE, A.FechaCreacion) FECHACREACION,\n"
             + "	CONVERT(VARCHAR, A.FechaCreacion, 8) HORACREACION, \n"
@@ -15,7 +14,8 @@ public class Querys {
             + "	B.Descripcion DESCRIPCIONLOG\n"
             + "FROM\n"
             + "	LogEventosSistema A INNER JOIN TipoLog B\n"
-            + "	ON A.TipoLog_IdTipo  = B.IdTipo \n"
+            + "	ON A.TipoLog_IdTipo  = B.IdTipo INNER JOIN EmpresaProceso C\n"
+            + "	ON A.IdEmpresa = C.IdEmpresa \n"
             + "WHERE \n"
             + "	(A.IdEmpresa  = 'EXTRAC') \n"
             + "	AND CONVERT(DATE, A.FechaCreacion) = CONVERT(DATE, GETDATE())\n"

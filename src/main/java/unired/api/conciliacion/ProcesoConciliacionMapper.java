@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 @MapperDataSource("conciliacion")
 public interface ProcesoConciliacionMapper {
 
-    @Select(Querys.CONCILIACION_DIA_ACTUAL)
+    @Select(Querys.CONCILIACION_FECHA_ACTUAL)
     List<ProcesoConciliacion> getConciliacionDiaActual();
 
     @Select(Querys.HISTORICO_CONCILIACION)

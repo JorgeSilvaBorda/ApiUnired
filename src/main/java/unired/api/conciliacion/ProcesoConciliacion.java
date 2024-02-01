@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 public class ProcesoConciliacion {
     private Integer idLogSistema;
     private String idEmpresa;
-    private String codEmpresa;
     private String nombreEps;
     private LocalDateTime fechaHoraCreacion;
     private LocalDate fechaCreacion;
@@ -17,10 +16,9 @@ public class ProcesoConciliacion {
     public ProcesoConciliacion() {
     }
 
-    public ProcesoConciliacion(Integer idLogSistema, String idEmpresa, String codEmpresa, String nombreEps, LocalDateTime fechaHoraCreacion, LocalDate fechaCreacion, String horaCreacion, Integer idTipoLog, String descripcionLog) {
+    public ProcesoConciliacion(Integer idLogSistema, String idEmpresa, String nombreEps, LocalDateTime fechaHoraCreacion, LocalDate fechaCreacion, String horaCreacion, Integer idTipoLog, String descripcionLog) {
         this.idLogSistema = idLogSistema;
         this.idEmpresa = idEmpresa;
-        this.codEmpresa = codEmpresa;
         this.nombreEps = nombreEps;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.fechaCreacion = fechaCreacion;
@@ -43,14 +41,6 @@ public class ProcesoConciliacion {
 
     public void setIdEmpresa(String idEmpresa) {
         this.idEmpresa = idEmpresa;
-    }
-
-    public String getCodEmpresa() {
-        return codEmpresa;
-    }
-
-    public void setCodEmpresa(String codEmpresa) {
-        this.codEmpresa = codEmpresa;
     }
 
     public String getNombreEps() {

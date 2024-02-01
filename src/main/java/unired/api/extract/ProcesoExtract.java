@@ -7,7 +7,7 @@ public class ProcesoExtract {
 
     private Integer idLogSistema;
     private String idEmpresa;
-    private String codEmpresa;
+    //private String codEmpresa;
     private String nombreEps;
     private LocalDateTime fechaHoraCreacion;
     private LocalDate fechaCreacion;
@@ -18,10 +18,10 @@ public class ProcesoExtract {
     public ProcesoExtract() {
     }
 
-    public ProcesoExtract(Integer idLogSistema, String idEmpresa, String codEmpresa, String nombreEps, LocalDateTime fechaHoraCreacion, LocalDate fechaCreacion, String horaCreacion, Integer idTipoLog, String descripcionLog) {
+    public ProcesoExtract(Integer idLogSistema, String idEmpresa, String nombreEps, LocalDateTime fechaHoraCreacion, LocalDate fechaCreacion, String horaCreacion, Integer idTipoLog, String descripcionLog) {
         this.idLogSistema = idLogSistema;
         this.idEmpresa = idEmpresa;
-        this.codEmpresa = codEmpresa;
+        //this.codEmpresa = codEmpresa;
         this.nombreEps = nombreEps;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.fechaCreacion = fechaCreacion;
@@ -44,14 +44,6 @@ public class ProcesoExtract {
 
     public void setIdEmpresa(String idEmpresa) {
         this.idEmpresa = idEmpresa;
-    }
-
-    public String getCodEmpresa() {
-        return codEmpresa;
-    }
-
-    public void setCodEmpresa(String codEmpresa) {
-        this.codEmpresa = codEmpresa;
     }
 
     public String getNombreEps() {

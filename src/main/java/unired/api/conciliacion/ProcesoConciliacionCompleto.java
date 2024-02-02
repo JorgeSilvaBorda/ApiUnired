@@ -4,14 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ProcesoConciliacionCompleto {
-    
+
+    private String idEmpresa;
+    private String nombreEps;
+
     private LocalDate fechaProceso;
-    
+
     private LocalDateTime fechaHoraIniProceso;
     private String horaIniProceso;
     private Integer idEstadoIniProceso;
     private String descEstadoIniProceso;
-    
+
     private LocalDateTime fechaHoraFinProceso;
     private String horaFinProceso;
     private Integer idEstadoFinProceso;
@@ -20,7 +23,9 @@ public class ProcesoConciliacionCompleto {
     public ProcesoConciliacionCompleto() {
     }
 
-    public ProcesoConciliacionCompleto(LocalDate fechaProceso, LocalDateTime fechaHoraIniProceso, String horaIniProceso, Integer idEstadoIniProceso, String descEstadoIniProceso, LocalDateTime fechaHoraFinProceso, String horaFinProceso, Integer idEstadoFinProceso, String descEstadoFinProceso) {
+    public ProcesoConciliacionCompleto(String idEmpresa, String nombreEps, LocalDate fechaProceso, LocalDateTime fechaHoraIniProceso, String horaIniProceso, Integer idEstadoIniProceso, String descEstadoIniProceso, LocalDateTime fechaHoraFinProceso, String horaFinProceso, Integer idEstadoFinProceso, String descEstadoFinProceso) {
+        this.idEmpresa = idEmpresa;
+        this.nombreEps = nombreEps;
         this.fechaProceso = fechaProceso;
         this.fechaHoraIniProceso = fechaHoraIniProceso;
         this.horaIniProceso = horaIniProceso;
@@ -30,6 +35,22 @@ public class ProcesoConciliacionCompleto {
         this.horaFinProceso = horaFinProceso;
         this.idEstadoFinProceso = idEstadoFinProceso;
         this.descEstadoFinProceso = descEstadoFinProceso;
+    }
+
+    public String getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(String idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public String getNombreEps() {
+        return nombreEps;
+    }
+
+    public void setNombreEps(String nombreEps) {
+        this.nombreEps = nombreEps;
     }
 
     public LocalDate getFechaProceso() {
@@ -103,6 +124,5 @@ public class ProcesoConciliacionCompleto {
     public void setDescEstadoFinProceso(String descEstadoFinProceso) {
         this.descEstadoFinProceso = descEstadoFinProceso;
     }
-    
-    
+
 }

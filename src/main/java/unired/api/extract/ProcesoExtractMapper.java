@@ -12,7 +12,7 @@ public interface ProcesoExtractMapper {
     @Select(Querys.EXTRACT_FECHA_ACTUAL)
     List<ProcesoExtract> getExtractDiaActual();
     
-    @Select(Querys.HISTORICO_EXTRACT)
+    @Select(Querys.HISTORIA_EXTRACT)
     List<ProcesoExtractCompleto> getHistoricoExtract(String fechaIni, String fechaFin);
     
 }

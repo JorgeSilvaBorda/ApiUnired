@@ -9,10 +9,10 @@ import org.apache.ibatis.annotations.Select;
 @MapperDataSource("extract")
 public interface ProcesoExtractMapper {
     
-    @Select(Querys.EXTRACT_FECHA_ACTUAL)
+    @Select(Querys.EXTRACT_FECHA_ACTUA)
     List<ProcesoExtract> getExtractDiaActual();
     
-    @Select(Querys.HISTORICO_EXTRACT)
+    @Select(Querys.HISTORIA_EXTRACT)
     List<ProcesoExtractCompleto> getHistoricoExtract(String fechaIni, String fechaFin);
     
 }

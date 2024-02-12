@@ -129,16 +129,16 @@ public class ProcesoConciliacionResource {
 		resumen.put("exitoso", 1);
 	    }
 	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 4){ //Es un término con éxito, pero no cuenta con un inicio
-		resumen.put("programadosHoy", 1);
-		resumen.put("ejecutados", 1);
-		resumen.put("exitoso", 1);
-	    }
-	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 6){ //Es un término con de error, pero no cuenta con un inicio
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 4){ //Es un término con error, pero no cuenta con un inicio
 		resumen.put("programadosHoy", 1);
 		resumen.put("ejecutados", 1);
 		resumen.put("error", 1);
+	    }
+	    
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 6){ //Es un término exitoso, pero no cuenta con un inicio
+		resumen.put("programadosHoy", 1);
+		resumen.put("ejecutados", 1);
+		resumen.put("exitoso", 1);
 	    }
 	}
 	
@@ -156,16 +156,16 @@ public class ProcesoConciliacionResource {
 		resumen.put("exitoso", 1);
 	    }
 	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 4){ //Es un término con éxito, pero no cuenta con un inicio
-		resumen.put("programadosHoy", 1);
-		resumen.put("ejecutados", 1);
-		resumen.put("exitoso", 1);
-	    }
-	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 6){ //Es un término con de error, pero no cuenta con un inicio
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 4){ //Es un término con error, pero no cuenta con un inicio
 		resumen.put("programadosHoy", 1);
 		resumen.put("ejecutados", 1);
 		resumen.put("error", 1);
+	    }
+	    
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 6){ //Es un término exitoso, pero no cuenta con un inicio
+		resumen.put("programadosHoy", 1);
+		resumen.put("ejecutados", 1);
+		resumen.put("exitoso", 1);
 	    }
 	}
 	

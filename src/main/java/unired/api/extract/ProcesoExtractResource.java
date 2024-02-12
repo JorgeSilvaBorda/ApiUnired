@@ -86,7 +86,7 @@ public class ProcesoExtractResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, Integer> getResumenDiaActual(){
 	List<ProcesoExtract> procesos = mapper.getExtractDiaActual();
-	Integer programadosHoy = 0;
+	Integer programadosHoy = 1;
 	Integer pendientes = 0;
 	Integer enEjecucion = 0;
 	Integer exitoso = 0;
@@ -138,14 +138,14 @@ public class ProcesoExtractResource {
 		resumen.put("exitoso", 1);
 	    }
 	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 4){ //Es un término con éxito, pero no cuenta con un inicio
-		resumen.put("programadosHoy", 1);
-		resumen.put("exitoso", 1);
-	    }
-	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 6){ //Es un término con de error, pero no cuenta con un inicio
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 4){ //Es un término con Error, pero no cuenta con un inicio
 		resumen.put("programadosHoy", 1);
 		resumen.put("error", 1);
+	    }
+	    
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(1).getIdTipoLog() == 6){ //Es un término exitoso, pero no cuenta con un inicio
+		resumen.put("programadosHoy", 1);
+		resumen.put("exitoso", 1);
 	    }
 	}
 	
@@ -161,14 +161,14 @@ public class ProcesoExtractResource {
 		resumen.put("exitoso", 1);
 	    }
 	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 4){ //Es un término con éxito, pero no cuenta con un inicio
-		resumen.put("programadosHoy", 1);
-		resumen.put("exitoso", 1);
-	    }
-	    
-	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 6){ //Es un término con de error, pero no cuenta con un inicio
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 4){ //Es un término con error, pero no cuenta con un inicio
 		resumen.put("programadosHoy", 1);
 		resumen.put("error", 1);
+	    }
+	    
+	    if (procesos.get(0).getIdTipoLog() != 2 && procesos.get(procesos.size() - 1).getIdTipoLog() == 6){ //Es un término exitoso, pero no cuenta con un inicio
+		resumen.put("programadosHoy", 1);
+		resumen.put("exitoso", 1);
 	    }
 	}
 	

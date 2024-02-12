@@ -19,8 +19,8 @@ public class Querys {
             + "WHERE \n"
             + "	(A.IdEmpresa  = 'EXTRAC') \n"
             + "	AND CONVERT(DATE, A.FechaCreacion) = CONVERT(DATE, GETDATE())\n"
-	    + "AND A.FechaCreacion <= CONVERT(DATETIME, (CONVERT(VARCHAR, CONVERT(DATE, GETDATE())) + ' 02:22:20.999'))"
-            //+ "	AND A.FechaCreacion <= CONVERT(DATETIME, (CONVERT(VARCHAR, CONVERT(DATE, GETDATE())) + ' 02:25:59.999'))\n"
+	    //+ "AND A.FechaCreacion <= CONVERT(DATETIME, (CONVERT(VARCHAR, CONVERT(DATE, GETDATE())) + ' 02:22:20.999'))"
+            + "	AND A.FechaCreacion <= CONVERT(DATETIME, (CONVERT(VARCHAR, CONVERT(DATE, GETDATE())) + ' 02:25:59.999'))\n"
             + "	AND A.FechaCreacion >= CONVERT(DATETIME, (CONVERT(VARCHAR, CONVERT(DATE, GETDATE())) + ' 02:20:00.000'))\n"
             + "ORDER BY\n"
             + "	A.FechaCreacion ASC ";
